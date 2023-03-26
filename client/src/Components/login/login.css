@@ -1,0 +1,27 @@
+.formContainer{
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+   
+}
+.formInput
+{
+    display: block;
+    margin:  1%;
+    align-self: center;
+    
+}
+.formWarn{
+    margin:  1%;
+    color: red;
+    display: block;
+    align-self: center;
+}
+.formBtn
+{
+    display: block;
+    margin:  1%;
+    border-radius: 3px;
+    align-self: center;
+}
