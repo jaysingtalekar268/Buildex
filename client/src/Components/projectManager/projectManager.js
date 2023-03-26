@@ -6,6 +6,7 @@ import './projectManager.css';
 function ProjectManager() {
     const [projectName, setPName] = useState("");
     const [projectDesc, setPDesc] = useState("");
+    const [projectType, setPType] = useState("");
 
     const [tabKey, setTab] = useState('NProject');
     const [devList, setDev] = useState("");
@@ -29,7 +30,8 @@ function ProjectManager() {
                 name: projectName,
                 desc: projectDesc,
                 devl_id: multiDevSel,
-                pstatus:"incomp "
+                catg: projectType,
+                pstatus: "incomp"
             }),
             headers: {
                 'Content-type': 'application/json'
@@ -42,7 +44,7 @@ function ProjectManager() {
 
     const getlist = async () => {
 
-        let listresult = await fetch("http://localhost:3001/getuser", {
+        let listresult = await fetch("http://localhost:3001/getdevl", {
             method: 'post',
             body: JSON.stringify(),
             headers: {
@@ -107,6 +109,8 @@ function ProjectManager() {
                                 <input className="input" onChange={e => setPName(e.target.value)}></input>
                                 <label className="inputLabel">Project Description</label>
                                 <input className="input" onChange={(e) => setPDesc(e.target.value)}></input>
+                                <label className="inputLabel">Project category</label>
+                                <input className="input" onChange={(e) => setPType(e.target.value)}></input>
 
 
                                 {/* <select name="devSel" id="devSel" onChange={Addsel} multiple>
@@ -114,7 +118,7 @@ function ProjectManager() {
                                 </select>
                                 {selDevList} */}
 
-
+                                <label className="inputLabel">Select Developers</label>
 
                                 {devList ? <Multiselect options={devList} displayValue="name" onSelect={MultipleSelect} ></Multiselect> : <span>loading user</span>}
                                 {multiDevSel + ""}

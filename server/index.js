@@ -32,6 +32,17 @@ app.post("/Checkuser",async (req,resp)=>{
    
 });
 
+app.post("/useradd" ,async (req,resp)=>{
+    
+    // console.warn(req.body);
+    let useradd = new User(req.body);
+    let result =await useradd.save();
+       
+    // console.warn(req.body.devl_id);
+    // let userProjectResult= await User.findOneAndUpdate({_id:req.body.devl_id},{   $push: {project_id:result._id}}   ,{new :true});
+    // console.warn(userProjectResult); 
+    resp.send(result);
+});
 app.post("/projectadd" ,async (req,resp)=>{
     
     // console.warn(req.body);
@@ -53,6 +64,13 @@ app.post("/getproject" ,async (req,resp)=>{
 
 app.post("/getuser" ,async (req,resp)=>{
     let userdata= await User.find().select("-password ");
+    
+        resp.send(userdata);
+    
+});
+
+app.post("/getdevl" ,async (req,resp)=>{
+    let userdata= await User.find({role:"developer"}).select("-password ");
     
         resp.send(userdata);
     
