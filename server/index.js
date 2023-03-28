@@ -111,6 +111,12 @@ app.post("/getusermessage", async (req, resp) => {
 
 });
 
+app.post("/getusertimeline", async (req, resp) => {
+    let userdata = await User.find(req.body).populate('project_id').select(" project_id -_id");
+    resp.send(userdata);
+
+});
+
 app.post("/messageadd", async (req, resp) => {
 
     console.warn("its calling");

@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
         message_sender: String,
         time :Date
     }],
+    timeline:[
+        {
+        timeline_body: String,
+        timeline_sender: String,
+        time :Date
+    }],
 devl_id: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
