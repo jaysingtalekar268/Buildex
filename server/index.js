@@ -17,9 +17,12 @@ app.use(session({
 }));
 let userInfo = {};
 app.post("/Login", async (req, resp) => {
+    console.warn("called");
     userInfo = {};
     let userdata = await User.findOne(req.body).select("-password -_id");
+    console.warn("login status"+userdata)
     if (userdata) {
+       
         userInfo = userdata;
         resp.send(userdata);
     }
@@ -28,7 +31,7 @@ app.post("/Login", async (req, resp) => {
 
 
 app.post("/Checkuser", async (req, resp) => {
-
+    
     resp.send(userInfo);
 
 });
@@ -44,6 +47,7 @@ app.post("/useradd", async (req, resp) => {
     // console.warn(userProjectResult); 
     resp.send(result);
 });
+
 app.post("/projectadd", async (req, resp) => {
 
     console.warn(req.body);

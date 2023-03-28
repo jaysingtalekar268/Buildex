@@ -44,6 +44,7 @@ function Login() {
             localStorage.setItem("user", JSON.stringify(loginStatus));
             navigate("/");
         }
+       
     };
 
 
