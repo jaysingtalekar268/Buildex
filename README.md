@@ -1,5 +1,3 @@
-# Buildex
-MERN project Management here we go
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
