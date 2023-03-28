@@ -1,4 +1,3 @@
-import './login.css';
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import { Container, Button, Tabs, Tab } from 'react-bootstrap';
