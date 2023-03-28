@@ -34,17 +34,17 @@ function Dashboard() {
         }
 
     );
-        const [pieData,setPData]=useState([]);
+    const [pieData, setPData] = useState([]);
 
-        const [pieCharData,setPChart]=useState(
-            {
-                options: { labels: ["Completed",'Incompleted']},
-                series: pieData
-                
-            }
+    const [pieCharData, setPChart] = useState(
+        {
+            options: { labels: ["Completed", 'Incompleted'] },
+            series: pieData
 
-        );
-    
+        }
+
+    );
+
     const getProject = async () => {
         let userProjectResult = await fetch("http://localhost:3001/getuserprojectstatus", {
             method: "post",
@@ -67,7 +67,7 @@ function Dashboard() {
 
         console.warn("after da " + userProjectData);
     };
-   
+
     useEffect(() => {
         getProject()
     }, []);
@@ -160,7 +160,7 @@ function Dashboard() {
         setITask(i);
         setOTask(o);
         setTTask(c + i + o);
-        setPData([c,i])
+        setPData([c, i])
 
 
     };
@@ -205,7 +205,7 @@ function Dashboard() {
                     <span className='CompletedTaskCount' >100</span>
 
                 </Card.Body>
-            </Card> 
+            </Card>
 
             {"catg" + catg + ""}
             {" catg count" + catgCount + ""}

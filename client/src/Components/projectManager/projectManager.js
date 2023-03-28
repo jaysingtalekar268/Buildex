@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { Multiselect } from 'multiselect-react-dropdown';
 
 import './projectManager.css';
+import { Calendar } from "react-calendar";
 function ProjectManager() {
     const [projectName, setPName] = useState("");
     const [projectDesc, setPDesc] = useState("");
     const [projectType, setPType] = useState("");
+    const [projectDeadline, setPDDate] = useState(new Date());
 
     const [tabKey, setTab] = useState('NProject');
     const [devList, setDev] = useState("");
@@ -31,6 +33,12 @@ function ProjectManager() {
                 desc: projectDesc,
                 devl_id: multiDevSel,
                 catg: projectType,
+                deadline: projectDeadline,
+                message:[{
+                    message_body:"hello",
+                    message_sender:"manager"
+                }],
+                created: new Date(),
                 pstatus: "incomp"
             }),
             headers: {
@@ -72,7 +80,7 @@ function ProjectManager() {
     }
 
     const MultipleSelect = (e) => {
-        alert("multi select");
+        // alert("multi select");
         setMDev(Array.isArray(e) ? e.map(x => x._id) : []);
         console.warn("multi " + multiDevSel);
 
@@ -90,6 +98,7 @@ function ProjectManager() {
         setSelDev(e.target.value);
     };
 
+    console.warn("pdeadline " + projectDeadline.getDate());
 
     return (
         <Container className="mainContainer">
@@ -118,6 +127,8 @@ function ProjectManager() {
                                 </select>
                                 {selDevList} */}
 
+                                <label className="inputLabel">Select Deadline</label>
+                                <Calendar minDate={new Date()} onClickDay={(v, e) => setPDDate(v)} tileContent={({ date, view }) => view === 'month' && date.getDate() === projectDeadline.getDate() && date.getMonth() === projectDeadline.getMonth() && date.getFullYear() === projectDeadline.getFullYear() ? <p>Selected </p> : null} ></Calendar>
                                 <label className="inputLabel">Select Developers</label>
 
                                 {devList ? <Multiselect options={devList} displayValue="name" onSelect={MultipleSelect} ></Multiselect> : <span>loading user</span>}

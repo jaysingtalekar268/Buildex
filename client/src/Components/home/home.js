@@ -10,7 +10,7 @@ function Home() {
             <Container fluid className="homeContainer">
                <Row>
                 <Col className="homeCol" sm="1">  </Col>
-                <Col className="homeCol " ><ProjectCards></ProjectCards></Col>
+                {/* <Col className="homeCol " ><ProjectCards></ProjectCards></Col> */}
                 <Col className="homeCol" md="3"><Message></Message></Col>
                </Row>
             </Container>
