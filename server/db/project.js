@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
     message:[
         {
         message_body: String,
-        message_sender: String
-    
+        message_sender: String,
+        time :Date
     }],
 devl_id: [{
     type: mongoose.Schema.Types.ObjectId,

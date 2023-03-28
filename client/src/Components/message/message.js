@@ -38,7 +38,8 @@ function Message() {
                 project_id: userMessage[0].project_id[MPIndex]._id,
                 message:{
                     message_body:NMsgdata,
-                    message_sender:username.name
+                    message_sender:username.name,
+                    time:new Date()
                 }
             }),
             headers: {
@@ -57,9 +58,17 @@ function Message() {
 
 
     const sendNMsg = () => {
+        if(NMsgdata.length>=1)
+        {
         alert('new message sending ' + NMsgdata);
         console.warn("button nmsg " + NMsgdata);
+       
         addnewmsg();
+        }
+        else
+        {
+            alert("plesea add message");
+        }
         // setNMsg(e.target.value);
     };
 
@@ -174,7 +183,7 @@ function Message() {
 
                                             <span className="messageSend ">
                                                 <span className="messageSendBody">{m.message_body}</span>
-                                                <span className="messageSendTime ">1:00</span>
+                                                <span className="messageSendTime ">{ new Date(m.time).getHours()+":"+new Date(m.time).getMinutes()}</span>
                                             </span>
 
 
@@ -182,7 +191,7 @@ function Message() {
                                             :
                                             <span className="messageReceived ">
                                                 <span className="messageReceivedBody">{m.message_body}</span>
-                                                <span className="messageReceivedTime ">12:00</span>
+                                                <span className="messageReceivedTime ">{ new Date(m.time).getHours()+":"+new Date(m.time).getMinutes()}</span>
                                             </span>
 
                                     }
@@ -244,7 +253,7 @@ function Message() {
                 </Container> */}
                 <Container className="messageBar ">
                     <input className="messageInput" onChange={(e) => setNMsg(e.target.value)} type="text" placeholder="Message"></input>
-                    <p>{NMsgdata}</p>
+                    {/* <p>{NMsgdata}</p> */}
                     <Button onClick={sendNMsg}></Button>
                 </Container>
 

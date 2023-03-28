@@ -55,7 +55,7 @@ app.post("/projectadd", async (req, resp) => {
     let result = await projectadd.save();
 
     console.warn(req.body.devl_id);
-    let userProjectResult = await User.find({ _id: req.body.devl_id }, { $push: { project_id: result._id } }, { new: true });
+    let userProjectResult = await User.updateMany({ _id: req.body.devl_id }, { $push: { project_id: result._id } }, { new: true });
     console.warn(userProjectResult);
     resp.send(result);
 });
@@ -99,6 +99,11 @@ app.post("/getuserprojectstatus", async (req, resp) => {
     resp.send(userdata);
 
 });
+app.post("/getuserdates", async (req, resp) => {
+    let userdata = await User.find(req.body).populate('project_id').select("userevent project_id -_id");
+    resp.send(userdata);
+
+});
 
 app.post("/getusermessage", async (req, resp) => {
     let userdata = await User.find(req.body).populate('project_id', 'message name').select("project_id -_id");
@@ -113,5 +118,11 @@ app.post("/messageadd", async (req, resp) => {
     resp.send(messageProjectResult);
 });
 
+app.post("/eventadd", async (req, resp) => {
+
+    console.warn("event calling");
+    let userEventResult = await user.findOneAndUpdate({ name: req.body.name }, { $push: { userevent: req.body.event } }, { new: true });
+    resp.send(userEventResult);
+});
 
 app.listen(3001);

@@ -199,16 +199,17 @@ function Dashboard() {
             {catg[0] ? <Chart options={barChartData.options} series={barChartData.series} type="bar" width={500} height={320} /> : <span>waiting for data</span>}
 
             <Chart options={pieCharData.options} series={pieData} type="donut" width="380" />
-            <Card className='dashboardCardGraph'>
+            {/* <Card className='dashboardCardGraph'>
                 <Card.Body>
                     <Card.Title className='dashboardCardTitle'>All task by completion status</Card.Title>
                     <span className='CompletedTaskCount' >100</span>
+                    <Chart options={pieCharData.options} series={pieData} type="donut" width="380" />
 
                 </Card.Body>
-            </Card>
-
+            </Card> */}
+            {/* 
             {"catg" + catg + ""}
-            {" catg count" + catgCount + ""}
+            {" catg count" + catgCount + ""} */}
 
         </div>
     );

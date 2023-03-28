@@ -1,107 +1,168 @@
-import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { useEffect, useState, useRef } from "react";
+import { Container, Tab, Tabs } from "react-bootstrap";
 import Calendar from 'react-calendar';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 function PCalendar() {
     const username = JSON.parse(localStorage.getItem("user"));
-
-    const [userPdata, setUPData] = useState("");
-
-
-    const getdeadlines = async () => {
-
-        let deadlinesResult = await fetch("http://localhost:3001/getuserprojectstatus", {
-            method: "post",
+    const [userDData, setUDData] = useState("");
+    const [userEData, setUEData] = useState("");
+    const [userEDate, setUEDate] = useState();
+    const [tabkey, seTKey] = useState("eclose");
+    const isLoading = useRef(true); // Loading state
+    const getdates = async () => {
+        let DateResult = await fetch("http://localhost:3001/getuserdates", {
+            method: 'post',
             body: JSON.stringify({
-                name: username.name,
+                name: username.name
+
             }),
             headers: {
                 'Content-type': 'application/json'
             }
         });
 
-        deadlinesResult = await deadlinesResult.json();
-        console.warn("before da " + deadlinesResult);
-        if (deadlinesResult) {
-            console.warn("if fetch" + deadlinesResult[0].project_id[0].deadline);
-            setUPData(deadlinesResult);
+        DateResult = await DateResult.json();
+
+
+        if (DateResult) {
+            console.warn("date " + DateResult[0].project_id[0].deadline);
+            setUDData(DateResult);
+            isLoading.current = false;
+
         }
+
     };
 
     useEffect(() => {
-        getdeadlines();
+        if (isLoading.current) {
+            getdates();
+
+            isLoading.current = false;
+
+        }
+
     }, []);
 
 
+    const setevent = async () => {
+        let eventResult = await fetch("http://localhost:3001/eventadd", {
+            method: 'post',
+            body: JSON.stringify({
+                name: username.name,
+                event: {
+                    event_body: userEData,
+
+                    event_date: userEDate
+                }
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+
+        if (eventResult) {
+            alert("event added ");
+        }
+
+
+
+    }
 
     const addevent = (v, e) => {
-        alert(v);
-        console.warn(v);
 
-    };
-    const d = new Date();
-    // d.setFullYear(2023,2,26);
-
-    const getevent = ({ date, view }) => {
-        alert("get event ");
-        const td = new Date(userPdata[0].project_id[0].deadline);
-        console.warn(" get event " + td.getDate());
-        if (userPdata[0]) {
-            console.warn(" its if ");
-            userPdata.map(x => x.project_id.map(y => {
-
-                if (view == 'month' && date.getDate() === y.deadline.getDate() && date.getMonth() === y.deadline.getMonth() && date.getFullYear() === y.deadline.getFullYear()) {
-                    console.warn("y  " + y.pstatus)
-
-                    if (y.pstatus == "comp") {
-                        // return (<p>{y.name} Completed </p> );
-                    }
-                    else if (y.pstatus == "incomp") {
-                        alert("icomp title");
-
-                        // return (<p>{y.name} Incompleted </p> );
-                    }
-
-                    else if (y.pstatus == "ovdue") {
-
-                        // return (<p>{y.name} Overdue </p> );
-                    }
-                }
-
-
-
-
-
-            }));
-
+        if (userEData.length >= 1) {
+            setevent();
         }
         else {
+            alert("enter event details")
         }
 
     };
-    if (userPdata[0]) {
+    const openevet = (v, e) => {
+        setUEDate(v);
+
+        seTKey("eopen");
+        alert(v);
+
+    };
+
+    if (userDData) {
+        // alert(userDData[0].userevent[0].event_body)
         return (
 
             <Container>
-                <button onClick={getevent}>add event</button>
-                <Calendar onClickDay={addevent}
-                    
-                // tileContent={({ date, view }) => view === 'month' && date.getDate() === 26 && date.getMonth()===2  ? <p>It's Sunday! { 5+d}</p> : null}
-                ></Calendar>
+                <Tabs id="controlled-tab-example"
+                    activeKey={tabkey}
+                    onSelect={(k) => seTKey(k)}
+                    className="mb-3" >
+                    <Tab eventKey="eclose" >
+                        <Calendar onClickDay={openevet}
+                            tileContent={
+                                (
+                                    ({ date, view }) =>
+                                        userDData.map(user =>
+                                        (
+                                            <>
+                                                <>
+                                                    {user.project_id.map(project =>
+                                                        <>
+                                                            <>
+                                                                {view === 'month' && date.getDate() === new Date(project.deadline).getDate()
+                                                                    && date.getFullYear() === new Date(project.deadline).getFullYear()
+                                                                    && date.getMonth() === new Date(project.deadline).getMonth()
+                                                                    ? <p>{project.name} status {project.pstatus}</p> : null
+                                                                }
+                                                            </>
+                                                            <>
+                                                                {view === 'month' && date.getDate() === new Date(project.created).getDate()
+                                                                    && date.getFullYear() === new Date(project.created).getFullYear()
+                                                                    && date.getMonth() === new Date(project.created).getMonth()
+                                                                    ? <p>{project.name} created</p> : null
+                                                                }
+                                                            </>
 
-                {/* tileContent={({ date, view }) => view === 'month' && date.getDate() === projectDeadline.getDate() && date.getMonth() === projectDeadline.getMonth() && date.getFullYear  () === projectDeadline.getFullYear()   ? <p>Selected </p> : null} */}
+                                                        </>
 
-                <Popup trigger={<button className="button"> Add Event </button>} modal>
-                    <span> Modal content </span>
-                </Popup>
+                                                    )
+                                                    }
+                                                </>
+                                                <>
+
+                                                    {user.userevent.map(uevent =>
+                                                        <>
+                                                            {
+                                                                view === 'month' && date.getDate() === new Date(uevent.event_date).getDate()
+                                                                    && date.getFullYear() === new Date(uevent.event_date).getFullYear()
+                                                                    && date.getMonth() === new Date(uevent.event_date).getMonth()
+                                                                    ? <p>{uevent.event_body} </p> : null
+                                                            }
+                                                        </>
+                                                    )}
+                                                </>
+                                            </>
+                                        )
+
+                                        )
+                                )
+                            } >
+
+                        </Calendar>
+                    </Tab>
+                    <Tab eventKey="eopen" >
+                        <label >Selected Date {userEDate ? userEDate.toDateString() : null}</label>
+                        <input className='eInput' onChange={(e) => setUEData(e.target.value)} type="text" placeholder='Enter eventdata'></input>
+                        <button onClick={addevent}> Add event</button>
+                        <button onClick={()=>seTKey("eclose")}> Back</button>
+                    </Tab>
+                </Tabs>
             </Container>
         );
     }
     else {
-        <div>Waiting for data</div>
+        return <div>data is loading</div>
     }
-};
+}
 
 export default PCalendar;

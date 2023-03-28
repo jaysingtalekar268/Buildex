@@ -34,9 +34,10 @@ function ProjectManager() {
                 devl_id: multiDevSel,
                 catg: projectType,
                 deadline: projectDeadline,
-                message:[{
-                    message_body:"hello",
-                    message_sender:"manager"
+                message: [{
+                    message_body: "hello",
+                    message_sender: "manager",
+                    time:new Date()
                 }],
                 created: new Date(),
                 pstatus: "incomp"
