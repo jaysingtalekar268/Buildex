@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Container, Row, Col, Tab, Tabs, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import './message.css';
+import sendicon from '../message/send-icon.png';
+
+
 function Message() {
     const username = JSON.parse(localStorage.getItem("user"));
     const [userMessage, setUMesg] = useState("");
@@ -36,10 +39,10 @@ function Message() {
             method: "post",
             body: JSON.stringify({
                 project_id: userMessage[0].project_id[MPIndex]._id,
-                message:{
-                    message_body:NMsgdata,
-                    message_sender:username.name,
-                    time:new Date()
+                message: {
+                    message_body: NMsgdata,
+                    message_sender: username.name,
+                    time: new Date()
                 }
             }),
             headers: {
@@ -48,8 +51,7 @@ function Message() {
         })
 
         addmsgstatus = await addmsgstatus.json();
-        if(addmsgstatus)
-        {
+        if (addmsgstatus) {
             console.warn(addmsgstatus);
             getUmessage();
         }
@@ -58,15 +60,13 @@ function Message() {
 
 
     const sendNMsg = () => {
-        if(NMsgdata.length>=1)
-        {
-        alert('new message sending ' + NMsgdata);
-        console.warn("button nmsg " + NMsgdata);
-       
-        addnewmsg();
+        if (NMsgdata.length >= 1) {
+            alert('new message sending ' + NMsgdata);
+            console.warn("button nmsg " + NMsgdata);
+
+            addnewmsg();
         }
-        else
-        {
+        else {
             alert("plesea add message");
         }
         // setNMsg(e.target.value);
@@ -183,7 +183,7 @@ function Message() {
 
                                             <span className="messageSend ">
                                                 <span className="messageSendBody">{m.message_body}</span>
-                                                <span className="messageSendTime ">{ new Date(m.time).getHours()+":"+new Date(m.time).getMinutes()}</span>
+                                                <span className="messageSendTime ">{new Date(m.time).getHours() + ":" + new Date(m.time).getMinutes()}</span>
                                             </span>
 
 
@@ -191,7 +191,7 @@ function Message() {
                                             :
                                             <span className="messageReceived ">
                                                 <span className="messageReceivedBody">{m.message_body}</span>
-                                                <span className="messageReceivedTime ">{ new Date(m.time).getHours()+":"+new Date(m.time).getMinutes()}</span>
+                                                <span className="messageReceivedTime ">{new Date(m.time).getHours() + ":" + new Date(m.time).getMinutes()}</span>
                                             </span>
 
                                     }
@@ -224,9 +224,7 @@ function Message() {
 
     if (isLoading.current) {
         return (
-            <div>Loading hold on
-
-            </div>
+            <div>Loading hold on</div>
         );
     }
     else {
@@ -254,9 +252,8 @@ function Message() {
                 <Container className="messageBar ">
                     <input className="messageInput" onChange={(e) => setNMsg(e.target.value)} type="text" placeholder="Message"></input>
                     {/* <p>{NMsgdata}</p> */}
-                    <Button onClick={sendNMsg}></Button>
+                    <button class='btn btn-sm img-thumbnail btn-primary w-20 h-20' onClick={sendNMsg}><img src={sendicon} class='img-thumbnail icon'></img></button>
                 </Container>
-
             </Container>
         );
     }
