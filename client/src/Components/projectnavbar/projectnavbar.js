@@ -16,9 +16,9 @@ function ProjectNavBar() {
                 <Tab className='projectNavBarItem' title="Overview" eventKey="Overview"></Tab>
                 <Tab className='projectNavBarItem' title="List" eventKey="List"></Tab>
                 <Tab className='projectNavBarItem' title="Timeline" eventKey="Timeline"><Ptimeline></Ptimeline></Tab>
-                {/* <Tab className='projectNavBarItem' title="Calendar" eventKey="Calendar"> <PCalendar></PCalendar></Tab> */}
+                <Tab className='projectNavBarItem' title="Calendar" eventKey="Calendar"> <PCalendar></PCalendar></Tab>
                 <Tab className='projectNavBarItem' title="Dashboard" eventKey="Dashboard">
-                    {/* <Dashboard></Dashboard> */}
+                    <Dashboard></Dashboard>
                     </Tab>
                 <Tab className='projectNavBarItem' title="More" eventKey="More"></Tab>
             </Tabs>
