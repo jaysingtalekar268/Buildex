@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
 devl_id: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users'
+}],
+mang_id: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users'
 }]
 });
 

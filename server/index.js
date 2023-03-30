@@ -55,10 +55,31 @@ app.post("/projectadd", async (req, resp) => {
     let result = await projectadd.save();
 
     console.warn(req.body.devl_id);
-    let userProjectResult = await User.updateMany({ _id: req.body.devl_id }, { $push: { project_id: result._id } }, { new: true });
+    let userProjectResult = await User.updateMany({$or: [{ _id: req.body.devl_id  }, { _id: req.body.mang_id  }] }, { $push: { project_id: result._id } }, {new :true});
     console.warn(userProjectResult);
     resp.send(result);
 });
+
+app.post("/projectmodify", async (req, resp) => {
+
+    console.warn(req.body);
+    // let projectadd = new Project(req.body);
+    
+    // let result = await projectadd.save();
+
+    const doc = await Project.findOneAndUpdate({_id:req.body.p_id}, { name:req.body.name,  desc:req.body.desc, catg:req.body.catg, deadline:req.body.deadline,pstatus: req.body.pstatus}, {new :true});
+    console.warn(req.body.p_id);
+    if(req.body.devl_id || req.body.mang_id)
+    {
+    let userProjectResult = await User.updateMany({$or: [{ _id: req.body.devl_id  }, { _id: req.body.mang_id  }]}, { $pull: { project_id: req.body.p_id }   }, { new: true });
+    console.warn(userProjectResult);
+    }
+    resp.send(doc);
+
+    
+
+});
+
 
 app.post("/getonlyproject", async (req, resp) => {
     let projectdata = await Project.find(req.body);
@@ -88,6 +109,12 @@ app.post("/getdevl", async (req, resp) => {
 
 });
 
+app.post("/getmang", async (req, resp) => {
+    let userdata = await User.find({ role: "manager" }).select("-password ");
+
+    resp.send(userdata);
+
+});
 app.post("/getuserproject", async (req, resp) => {
     let userdata = await User.find(req.body).populate('project_id').select("project_id -_id");
     resp.send(userdata);
