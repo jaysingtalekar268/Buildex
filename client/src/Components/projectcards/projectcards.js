@@ -42,8 +42,8 @@ function ProjectCards() {
     }, []);
 
     const ename = (names) => {
-       
-         if (userProjectList) {
+
+        if (userProjectList) {
 
             console.warn("ulist" + userProjectList[0].project_id.name);
 
@@ -51,22 +51,22 @@ function ProjectCards() {
             // return names.map(name => <option value={name._id}>{name.name + " " + name._id}</option>);
             return (
                 names.map(name =>
-                    (
-                        name.project_id.map( xname=>
-                    <Card className="cardContainer ">
-                        <Card.Body>
+                (
+                    name.project_id.map(xname =>
+                        <Card className="cardContainer ">
+                            <Card.Body>
 
 
-                            <Card.Title> {xname.name}</Card.Title>
-                            <Card.Text>
-                                {xname.desc}
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
+                                <Card.Title> {xname.name}</Card.Title>
+                                <Card.Text>
+                                    {xname.desc}
+                                </Card.Text>
+                                <Button variant="primary">Go somewhere</Button>
+                            </Card.Body>
 
-                    </Card>
-                        )
+                        </Card>
                     )
+                )
                 )
             )
 
@@ -78,21 +78,8 @@ function ProjectCards() {
     }
 
     return (
-        <div className="cardDiv ">
+        <div className="card card-group p-5 m-5">
 
-            {/* <Card className="cardContainer ">
-                <Card.Body>
-
-
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-
-            </Card> */}
             {ename(userProjectList)}
         </div>
     );
