@@ -16,7 +16,7 @@ function ProjectNavBar() {
                 <Tab className='projectNavBarItem' title="Timeline" eventKey="Timeline"></Tab>
                 <Tab className='projectNavBarItem' title="Calendar" eventKey="Calendar"> <PCalendar></PCalendar></Tab>
                 <Tab className='projectNavBarItem' title="Dashboard" eventKey="Dashboard">
-                    {/* <Dashboard></Dashboard> */}
+                    <Dashboard></Dashboard>
                     </Tab>
                 <Tab className='projectNavBarItem' title="More" eventKey="More"></Tab>
             </Tabs>

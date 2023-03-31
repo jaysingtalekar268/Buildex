@@ -168,7 +168,7 @@ function Message() {
                     Message
                 </button>
                 <div class='offcanvas offcanvas-start w-25 overflow-scroll' scroll='true' id='messageBox' aria-labelledby="MessageBoxLabel">
-                <button class='btn btn-sm btn-primary' onClick={getUmessage}><img src={sendicon} class='img-thumbnail icon' width={20} height='20'></img></button>
+                <button class='btn btn-sm btn-primary' onClick={()=>seTKey("mclose")}><img src={sendicon} class='img-thumbnail icon' width={20} height='20'></img></button>
 
                     <Showmessage />
                     <div class="input-group mb-3">
