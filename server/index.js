@@ -55,44 +55,16 @@ app.post("/projectadd", async (req, resp) => {
     let result = await projectadd.save();
 
     console.warn(req.body.devl_id);
-    let userProjectResult = await User.updateMany({$or: [{ _id: req.body.devl_id  }, { _id: req.body.mang_id  }] }, { $push: { project_id: result._id } }, {new :true});
-    console.warn(userProjectResult);
+    let userProjectResult= await User.findOneAndUpdate({_id:req.body.devl_id},{   $push: {project_id:result._id}}   ,{new :true});
+    console.warn(userProjectResult); 
     resp.send(result);
 });
 
-app.post("/projectmodify", async (req, resp) => {
-
-    console.warn(req.body);
-    // let projectadd = new Project(req.body);
+app.post("/getproject" ,async (req,resp)=>{
+    let projectdata= await Project.find().populate('devl_id');
     
-    // let result = await projectadd.save();
-
-    const doc = await Project.findOneAndUpdate({_id:req.body.p_id}, { name:req.body.name,  desc:req.body.desc, catg:req.body.catg, deadline:req.body.deadline,pstatus: req.body.pstatus}, {new :true});
-    console.warn(req.body.p_id);
-    if(req.body.devl_id || req.body.mang_id)
-    {
-    let userProjectResult = await User.updateMany({$or: [{ _id: req.body.devl_id  }, { _id: req.body.mang_id  }]}, { $pull: { project_id: req.body.p_id }   }, { new: true });
-    console.warn(userProjectResult);
-    }
-    resp.send(doc);
-
+        resp.send(projectdata);
     
-
-});
-
-
-app.post("/getonlyproject", async (req, resp) => {
-    let projectdata = await Project.find(req.body);
-
-    resp.send(projectdata);
-
-});
-
-app.post("/getproject", async (req, resp) => {
-    let projectdata = await Project.find().populate('devl_id');
-
-    resp.send(projectdata);
-
 });
 
 app.post("/getuser", async (req, resp) => {

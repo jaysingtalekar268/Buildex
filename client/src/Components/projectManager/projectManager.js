@@ -8,6 +8,7 @@ function ProjectManager() {
     //dont change anything here 
     const [projectName, setPName] = useState("");
     const [projectDesc, setPDesc] = useState("");
+   
     const [projectType, setPType] = useState("");
     const [projectDeadline, setPDDate] = useState(new Date());
 
@@ -61,6 +62,15 @@ function ProjectManager() {
                     message_body: "hello",
                     message_sender: "manager",
                     time: new Date()
+                }],
+                created: new Date(),
+                pstatus: "incomp",
+                catg: projectType,
+                deadline: projectDeadline,
+                message: [{
+                    message_body: "hello",
+                    message_sender: "manager",
+                    time:new Date()
                 }],
                 created: new Date(),
                 pstatus: "incomp"
