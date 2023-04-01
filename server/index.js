@@ -19,10 +19,10 @@ let userInfo = {};
 app.post("/Login", async (req, resp) => {
     console.warn("called");
     userInfo = {};
-    let userdata = await User.findOne(req.body).select("-password -_id");
-    console.warn("login status"+userdata)
+    let userdata = await User.findOne(req.body).select("-password ");
+    console.warn("login status" + userdata)
     if (userdata) {
-       
+
         userInfo = userdata;
         resp.send(userdata);
     }
@@ -31,7 +31,7 @@ app.post("/Login", async (req, resp) => {
 
 
 app.post("/Checkuser", async (req, resp) => {
-    
+
     resp.send(userInfo);
 
 });
@@ -55,16 +55,74 @@ app.post("/projectadd", async (req, resp) => {
     let result = await projectadd.save();
 
     console.warn(req.body.devl_id);
-    let userProjectResult= await User.findOneAndUpdate({_id:req.body.devl_id},{   $push: {project_id:result._id}}   ,{new :true});
-    console.warn(userProjectResult); 
+    let userProjectResult = await User.updateMany({ $or: [{ _id: req.body.devl_id }, { _id: req.body.mang_id }] }, { $push: { project_id: result._id } }, { new: true });
+    console.warn(userProjectResult);
     resp.send(result);
 });
 
-app.post("/getproject" ,async (req,resp)=>{
-    let projectdata= await Project.find().populate('devl_id');
-    
-        resp.send(projectdata);
-    
+app.post("/projectmodify", async (req, resp) => {
+
+    console.warn(req.body);
+    // let projectadd = new Project(req.body);
+
+    // let result = await projectadd.save();
+
+    const doc = await Project.findOneAndUpdate({ _id: req.body.p_id }, { name: req.body.name, desc: req.body.desc, catg: req.body.catg, deadline: req.body.deadline, pstatus: req.body.pstatus }, { new: true });
+    console.warn(req.body.p_id);
+
+    let userProjectRemoveResult = await User.updateMany({ $or: [{ _id: req.body.devl_id }, { _id: req.body.mang_id }] }, { $pull: { project_id: req.body.p_id } }, { new: true });
+    console.warn(userProjectRemoveResult);
+    let userProjectAddResult = await User.updateMany({ $or: [{ _id: req.body.devl_id }, { _id: req.body.mang_id }] }, { $push: { project_id: req.body.p_id } }, { new: true });
+    console.warn(userProjectAddResult);
+
+    const docProject = await Project.findOneAndUpdate({ _id: req.body.p_id }, { mang_id: req.body.mang_id, devl_id: req.body.devl_id }, { new: true });
+
+    resp.send(docProject);
+
+
+
+});
+
+app.post("/projectdelete", async (req, resp) => {
+
+    console.warn(req.body);
+    // let projectadd = new Project(req.body);
+
+    // let result = await projectadd.save();
+
+    // await Product.findById(product._id);
+    // const doc = await Project.findOneAndUpdate({ _id: req.body.p_id }, { name: req.body.name, desc: req.body.desc, catg: req.body.catg, deadline: req.body.deadline, pstatus: req.body.pstatus }, { new: true });
+    // console.warn(req.body.p_id);
+
+    let userProjectRemoveResult = await User.updateMany({ $or: [{ _id: req.body.devl_id }, { _id: req.body.mang_id }] }, { $pull: { project_id: req.body.p_id } }, { new: true });
+    console.warn(userProjectRemoveResult);
+
+    let projectDelResult = await Project.deleteOne({ _id: req.body.p_id });
+    console.warn(projectDelResult);
+    // let userProjectAddResult = await User.updateMany({ $or: [{ _id: req.body.devl_id }, { _id: req.body.mang_id }] }, { $push: { project_id: req.body.p_id } }, { new: true });
+    // console.warn(userProjectAddResult);
+
+    // const docProject = await Project.findOneAndUpdate({ _id: req.body.p_id }, { mang_id: req.body.mang_id, devl_id: req.body.devl_id }, { new: true });
+
+    resp.send(projectDelResult);
+
+
+
+});
+
+
+app.post("/getonlyproject", async (req, resp) => {
+    let projectdata = await Project.find(req.body);
+
+    resp.send(projectdata);
+
+});
+
+app.post("/getproject", async (req, resp) => {
+    let projectdata = await Project.find().populate('devl_id');
+
+    resp.send(projectdata);
+
 });
 
 app.post("/getuser", async (req, resp) => {
@@ -73,6 +131,24 @@ app.post("/getuser", async (req, resp) => {
     resp.send(userdata);
 
 });
+
+app.post("/getuseraccount", async (req, resp) => {
+    let userdata = await User.findOne({_id:req.body._id}).select("-password ");
+
+    resp.send(userdata);
+    // resp.send(req.body);
+
+});
+
+app.post("/usermodify", async (req, resp) => {
+    let userdata = await User.findOneAndUpdate({ _id: req.body._id }, req.body , { new: true });
+
+    resp.send(userdata);
+    // resp.send(req.body);
+
+});
+
+
 
 app.post("/getdevl", async (req, resp) => {
     let userdata = await User.find({ role: "developer" }).select("-password ");
@@ -110,6 +186,13 @@ app.post("/getusermessage", async (req, resp) => {
 
 });
 
+app.post("/addusertimeline", async (req, resp) => {
+
+    console.warn("its timeline");
+    let timelineProjectResult = await Project.findOneAndUpdate({ _id: req.body.project_id }, { $push: { timeline: req.body.timeline } }, { new: true });
+    // resp.send(req.body);
+    resp.send(timelineProjectResult);
+});
 app.post("/getusertimeline", async (req, resp) => {
     let userdata = await User.find(req.body).populate('project_id').select(" project_id -_id");
     resp.send(userdata);
