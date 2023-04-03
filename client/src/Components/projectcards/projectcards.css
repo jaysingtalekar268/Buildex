@@ -1,0 +1,12 @@
+.cardDiv {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+
+}
+
+.cardContainer {
+
+   width: 18rem;
+   margin: 1%;
+}
