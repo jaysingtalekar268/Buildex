@@ -11,7 +11,7 @@ const Navbar = () => {
     return (
         <div class="navbar navbar-dark bg-primary sticky-top">
             <div class="me-auto">
-                <Link class='nav-item'><img src='/home/sdidd/Desktop/FSDProject/Buildex/client/public/logo512.jpg'></img></Link>
+                {/* <Link class='nav-item'><img src='/home/sdidd/Desktop/FSDProject/Buildex/client/public/logo512.jpg'></img></Link> */}
                 <Link class=" btn " to="/">Home</Link>
                 <Link class="btn" to="/MyProject">MyProject</Link>
                 {/*<Link className="btn" to="/Message">Message</Link>*/}

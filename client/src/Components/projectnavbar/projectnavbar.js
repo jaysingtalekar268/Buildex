@@ -27,7 +27,7 @@ function ProjectNavBar() {
                 <Tab className='projectNavBarItem' title="Dashboard" eventKey="Dashboard">
                     <Dashboard></Dashboard>
                 </Tab>
-                <Tab className='projectNavBarItem' title="More" eventKey="More"></Tab>
+              
             </Tabs>
         </div>
     );

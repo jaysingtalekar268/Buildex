@@ -114,7 +114,13 @@ function Ptimeline() {
                         { 
                         TLArray.map(titem =>
                             
-                        <VerticalTimelineElement >
+                        <VerticalTimelineElement 
+                        className="vertical-timeline-element--work"
+                        contentStyle={{ background: 'rgb(33, 150, 243)', color: '#000' }}
+                        contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                        // date="2011 - present"
+                        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#000' }}
+                        >
                             <h3 className="vertical-timeline-element-title">{TLData[0].project_id[titem.pid].name}</h3>
                         <h4 className="vertical-timeline-element-subtitle">{TLData[0].project_id[titem.pid].desc}</h4>
                             {titem.tid>=0?<p>{TLData[0].project_id[titem.pid].timeline[titem.tid].timeline_body+"-"+TLData[0].project_id[titem.pid].timeline[titem.tid].timeline_sender}</p>:null }
@@ -138,32 +144,7 @@ function Ptimeline() {
             <Container class='bg-black bg-opacity-75'>
                 <STimeline></STimeline>
                 <VerticalTimeline>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        contentStyle={{ background: 'rgb(33, 150, 243)', color: '#000' }}
-                        contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                        date="2011 - present"
-                        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#000' }}
-                    >
-                        <h3 className="vertical-timeline-element-title">Creative Director</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-                        <p>
-                            Creative Direction, User Experience, Visual Design, Project Management, Team Leading
-                        </p>
-                    </VerticalTimelineElement>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        contentStyle={{ background: 'rgb(33, 150, 243)', color: '#000' }}
-                        contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                        date="2011 - present"
-                        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#000' }}
-                    >
-                        <h3 className="vertical-timeline-element-title">Creative Director</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-                        <p>
-                            Creative Direction, User Experience, Visual Design, Project Management, Team Leading
-                        </p>
-                    </VerticalTimelineElement>
+                 
                 </VerticalTimeline>
             </Container>
         );

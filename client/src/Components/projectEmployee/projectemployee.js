@@ -1,7 +1,8 @@
-import { div } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { Multiselect } from 'multiselect-react-dropdown';
 import { Calendar } from "react-calendar";
+import './projectemployee.css'
 
 function ProjectEmployee() {
 
@@ -41,7 +42,7 @@ function ProjectEmployee() {
     }, []);
 
     useEffect(() => {
-        alert("state changed" + multiProjSel[0])
+        // alert("state changed" + multiProjSel[0])
         if (multiProjSel[0]) {
             MultipleProjSelectIndex();
 
@@ -82,7 +83,7 @@ function ProjectEmployee() {
 
     const addtimeline = () => {
         if (NTimelinedata.length >= 1) {
-            alert('new message sending ' + NTimelinedata);
+            // alert('new message sending ' + NTimelinedata);
             console.warn("button nmsg " + NTimelinedata);
 
             setTimeline();
@@ -120,7 +121,7 @@ function ProjectEmployee() {
             }
         }
         setMSProj(filteredObj);
-        alert(filteredObj);
+        // alert(filteredObj);
         console.warn("index " + temp_index, filteredObj);
 
 
@@ -131,7 +132,7 @@ function ProjectEmployee() {
 
 
     return (
-        <div class='card w-50 h-50 position-absolute top-25 start-25 shadow bg-body rounded bg-info'>
+        <Container class='card w-50 h-50 position-absolute top-25 start-25 shadow bg-body rounded bg-info'>
             <label className="inputLabel">Select Project</label>
 
             {ProjList ? <Multiselect singleSelect={true} options={ProjList} displayValue="name" onSelect={MultipleProjSelect} ></Multiselect> : <span>loading Project</span>}
@@ -142,11 +143,11 @@ function ProjectEmployee() {
                         <label> Add Timeline </label>
                         <input className="messageInput" onChange={(e) => setNTimeline(e.target.value)} type="text" placeholder="Message"></input>
                         <label className="inputLabel">Select Deadline</label>
-                        <Calendar minDate={new Date()} onClickDay={(v, e) => setPDDate(v)} tileContent={({ date, view }) => view === 'month' && date.getDate() === projectDeadline.getDate() && date.getMonth() === projectDeadline.getMonth() && date.getFullYear() === projectDeadline.getFullYear() ? <p>Selected </p> : null} ></Calendar>
+                        <Calendar className="calendarStyle" minDate={new Date()} onClickDay={(v, e) => setPDDate(v)} tileContent={({ date, view }) => view === 'month' && date.getDate() === projectDeadline.getDate() && date.getMonth() === projectDeadline.getMonth() && date.getFullYear() === projectDeadline.getFullYear() ? <p  >Selected </p> : null} ></Calendar>
                         <button className="inkartikputBtn" onClick={addtimeline} >Add To Timeline</button>
-                    </> : <p>Please Select a Project</p>
+                    </> : <p class='card bg-opacity-75  mt-5 bg-dark text-light'>Please Select a Project</p>
             }
-        </div>
+        </Container>
     );
 }
 

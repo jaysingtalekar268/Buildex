@@ -29,7 +29,7 @@ function Message() {
         })
 
         userMData = await userMData.json();
-        if (userMData) {
+        if (userMData[0].project_id[0]) {
             setUMesg(userMData);
             console.warn("umsg " + userMData[0].project_id[0].message[0].message_body)
             // console.warn("usmsfn ");
@@ -63,7 +63,7 @@ function Message() {
 
     const sendNMsg = () => {
         if (NMsgdata.length >= 1) {
-            alert('new message sending ' + NMsgdata);
+            // alert('new message sending ' + NMsgdata);
             console.warn("button nmsg " + NMsgdata);
 
             addnewmsg();
@@ -150,7 +150,7 @@ function Message() {
             );
         }
         else {
-            return (<div> Getting Message</div>);
+            return (<div class='card bg-opacity-75  bg-dark text-light'> Getting Message</div>);
         }
 
 
@@ -160,7 +160,7 @@ function Message() {
 
     if (isLoading.current) {
         return (
-            <div>Loading hold on</div>
+            <div class=' card spinner-border text-danger bg-opacity-75  bg-dark text-light' ><div class=" visually-hidden"></div></div>
         );
     }
     else {
@@ -170,7 +170,7 @@ function Message() {
                     Message
                 </button>
                 <div class='offcanvas offcanvas-start w-25 overflow-scroll' scroll='true' id='messageBox' aria-labelledby="MessageBoxLabel">
-                <button class='btn btn-close btn-dark' onClick={()=>seTKey("mclose")}></button>
+                    <button class='btn btn-close btn-dark mt-3 ms-2 ' onClick={() => seTKey("mclose")} ></button>
 
                     <Showmessage />
                     <div class="fs-5 input-group mx-auto">

@@ -36,7 +36,7 @@ function ProjectManager() {
     }, []);
 
     useEffect(() => {
-        alert("state changed" + multiProjSel[0])
+        // alert("state changed" + multiProjSel[0])
         if (multiProjSel[0]) {
             MultipleProjSelectIndex();
 
@@ -47,7 +47,7 @@ function ProjectManager() {
 
 
     const addProject = async () => {
-        alert(projectName + projectDesc);
+        // alert(projectName + projectDesc);
         let addresult = await fetch("http://localhost:3001/Projectadd", {
             method: 'post',
             body: JSON.stringify({
@@ -278,7 +278,7 @@ function ProjectManager() {
             }
         }
         setMSProj(filteredObj);
-        alert(filteredObj);
+        // alert(filteredObj);
         console.warn("index " + temp_index, filteredObj);
 
         setPDDate(new Date(filteredObj.deadline));
@@ -323,7 +323,7 @@ function ProjectManager() {
     // };
 
     const Addsel = (e) => {
-        alert("im calling");
+        // alert("im calling");
         setSelDev(e.target.value);
     };
 
@@ -406,7 +406,7 @@ function ProjectManager() {
                                             {devList ? <Multiselect options={devList} displayValue="name" selectedValues={DevlPreList} onSelect={MultipleDevSelect} onRemove={MultipleDevRemove} ></Multiselect> : <span>loading user</span>}
                                             {multiDevSel + ""}
                                             <button className="inputBtn" onClick={modifyProject} >Modify  Project</button>
-                                        </> : <p>select project</p>
+                                        </> : <p class='card bg-opacity-75  mt-5 bg-dark text-light' >select project</p>
                                 }
                             </Tab>
                             <Tab eventKey="DProject" >
@@ -414,17 +414,19 @@ function ProjectManager() {
                                 <label className="inputLabel">Select Project To Delete</label>
 
                                 {ProjList ? <Multiselect singleSelect={true} options={ProjList} displayValue="name" onSelect={MultipleProjSelect} ></Multiselect> : <span>loading Project</span>}
-                                {multiProjSel + ""}
+                                {/* {multiProjSel + ""} */}
                                 {console.warn(" ps " + multiProjSel)}
                                 {
                                     multiProjSingSel._id ?
                                         <>
-                                            <label className="inputLabel">Are you sure to delte {multiProjSingSel.name} </label>
+                                            <label className="inputLabel">Are you sure to delte <font class="fw-bold"> {multiProjSingSel.name} </font></label>
+                                            <br></br>
                                             <button className="inputBtn" onClick={deleteProject} >Confirm</button>
-                                            <button className="inputBtn" onClick={alert(" no function for back")} >Cancel</button>
+                                           
+                                            <button className="inputBtn m-3 " onClick={()=>alert(" no function for back")} >Cancel</button>
 
 
-                                            // remove in final testing beloe code
+                                            {/* // remove in final testing beloe code
                                             <input className="input" onChange={e => setPName(e.target.value)} value={projectName} defaultValue={multiProjSingSel.name} placeholder="loading.."></input>
                                             <label className="inputLabel">Project Description</label>
                                             <input className="input" onChange={(e) => setPDesc(e.target.value)} value={projectDesc} defaultValue={multiProjSingSel.desc} placeholder="loading.."></input>
@@ -448,8 +450,8 @@ function ProjectManager() {
 
                                             {devList ? <Multiselect options={devList} displayValue="name" selectedValues={DevlPreList} onSelect={MultipleDevSelect} onRemove={MultipleDevRemove} ></Multiselect> : <span>loading user</span>}
                                             {multiDevSel + ""}
-                                            <button className="inputBtn" onClick={modifyProject} >Modify  Project</button>
-                                        </> : <p>select project</p>
+                                            <button className="inputBtn" onClick={modifyProject} >Modify  Project</button> */}
+                                        </> : <p class='card bg-opacity-75  mt-5 bg-dark text-light' >select project</p>
                                 }
 
                             </Tab>

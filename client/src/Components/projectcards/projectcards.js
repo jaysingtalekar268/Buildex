@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import './projectcards.css';
 function ProjectCards() {
 
     let username = localStorage.getItem("user");
+    const navigate = useNavigate();
     const [userProjectList, setPList] = useState();
     username = JSON.parse(username);
     const getuserproject = async () => {
@@ -61,7 +63,7 @@ function ProjectCards() {
                                 <Card.Text>
                                     {xname.desc}
                                 </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
+                                <Button variant="primary" onClick={() => navigate('/MyProject',)} >Details</Button>
                             </Card.Body>
 
                         </Card>
@@ -73,11 +75,16 @@ function ProjectCards() {
 
         }
         else {
-            return (<span>wating to get user projects</span>);
+            return (<span class='card bg-opacity-75  bg-dark text-light'>wating to get user projects</span>);
         }
     }
 
+
+    if(ename)
+    {
+
     return (
+
         <div className="cardDiv ">
 
             {/* <Card className="cardContainer ">
@@ -96,6 +103,16 @@ function ProjectCards() {
             {ename(userProjectList)}
         </div>
     );
+        }
+        else
+        {
+            return (
+                <div className="cardDiv ">
+                    
+                </div>
+            );
+        }
+
 }
 
 export default ProjectCards;
