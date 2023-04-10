@@ -8,7 +8,7 @@ function Home() {
 
     return (
         <>
-            {/* <ProjectCards></ProjectCards> */}
+            <ProjectCards></ProjectCards> 
             <Message></Message>
         </>
         );

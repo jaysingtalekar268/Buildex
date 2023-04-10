@@ -362,12 +362,10 @@ function ProjectManager() {
                                 <label className="inputLabel">Select Mangers</label>
 
                                 {MangList ? <Multiselect options={MangList} displayValue="name" onSelect={MultipleMangSelect} ></Multiselect> : <span>loading Mangers</span>}
-                                {multiMangSel + ""}
 
                                 <label className="inputLabel"> Select Developers</label>
 
                                 {devList ? <Multiselect options={devList} displayValue="name" onSelect={MultipleDevSelect} ></Multiselect> : <span>loading user</span>}
-                                {multiDevSel + ""}
                                 <button className="inputBtn" onClick={addProject} >Add Project</button>
 
 
@@ -376,7 +374,6 @@ function ProjectManager() {
                                 <label className="inputLabel">Select Project</label>
 
                                 {ProjList ? <Multiselect singleSelect={true} options={ProjList} displayValue="name" onSelect={MultipleProjSelect} ></Multiselect> : <span>loading Project</span>}
-                                {multiProjSel + ""}
                                 {console.warn(" ps " + multiProjSel)}
                                 {
                                     multiProjSingSel._id ?
@@ -399,12 +396,10 @@ function ProjectManager() {
                                             <label className="inputLabel">Select Mangers</label>
 
                                             {MangList ? <Multiselect options={MangList} displayValue="name" selectedValues={MangPreList} onSelect={MultipleMangSelect} onRemove={MultipleMangRemove} ></Multiselect> : <span>loading Mangers</span>}
-                                            {multiMangSel + ""}
 
                                             <label className="inputLabel"> Select Developers</label>
 
                                             {devList ? <Multiselect options={devList} displayValue="name" selectedValues={DevlPreList} onSelect={MultipleDevSelect} onRemove={MultipleDevRemove} ></Multiselect> : <span>loading user</span>}
-                                            {multiDevSel + ""}
                                             <button className="inputBtn" onClick={modifyProject} >Modify  Project</button>
                                         </> : <p class='card bg-opacity-75  mt-5 bg-dark text-light' >select project</p>
                                 }
