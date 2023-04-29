@@ -130,6 +130,11 @@ function Profile() {
                                         <label for="floatingPhone">Phone</label>
                                     </div>
 
+                                    <div class="form-floating mb-3">
+                                        <input type="tel" className="form-control input" value={username.role} defaultValue={UData.phone} placeholder="loading.." />
+                                        <label for="floatingPhone">Role</label>
+                                    </div>
+
                                     <button class="btn btn-primary" onClick={modifyDetails}>Change Details</button>
                                 </>
                                 : <p>loading data</p>
