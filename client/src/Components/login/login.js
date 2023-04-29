@@ -25,7 +25,7 @@ function Login() {
         }
     });
     const login = async () => {
-       
+
         let loginStatus = await fetch(`${process.env.REACT_APP_SERVER_URL}/Login`, {
             method: "post",
             body: JSON.stringify({
@@ -45,7 +45,7 @@ function Login() {
             localStorage.setItem("user", JSON.stringify(loginStatus));
             navigate("/");
         }
-        
+
 
     };
 
@@ -120,9 +120,17 @@ function Login() {
                 className="">
                 <Tab eventKey="login" class='card shadow text-center vw-50 vh-50'>
                     <label>Your Username</label>
+
+                    <label className='userguide'>username - manager</label>
+
+                    <label  className='userguide'>username - developer</label>
+
                     <input class='form-text' onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Username'></input>
                     <div class='text-warning'>{nameWarn}</div>
+
                     <label>Your Password</label>
+                    <label  className='userguide'>password - root123</label>
+
                     <input class='form-text' onChange={(e) => setPwd(e.target.value)} type="password" placeholder='Enter Password'></input>
                     <div class='text-warning align-items-md-end'>{passWarn}</div>
                     <div><a class='link' onClick={() => setTab("register")}>New to Buildex?</a></div>
@@ -142,6 +150,7 @@ function Login() {
                     <input className='form-text' onChange={(e) => setPhone(e.target.value)} type="text" placeholder='Enter Phone'></input>
                     <div class='text-warning align-items-md-end'>{passWarn}</div>
                     <label>Your Role</label>
+                    <label  className='userguide'>enter manager or developer only </label>
                     <input className='form-text' onChange={(e) => setRole(e.target.value)} type="text" placeholder='Enter Role'></input>
                     <div class='text-warning align-items-md-end'>{passWarn}</div>
                     <div><a class='link' onClick={() => setTab("login")}>Already have account</a></div>
