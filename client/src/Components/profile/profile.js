@@ -17,7 +17,7 @@ function Profile() {
 
 
     const getuserdetails = async () => {
-        let userdata = await fetch("http://localhost:3001/getuseraccount", {
+        let userdata = await fetch(`${process.env.REACT_APP_SERVER_URL}/getuseraccount`, {
             method: 'post',
             body: JSON.stringify({
                 _id: username._id
@@ -41,7 +41,7 @@ function Profile() {
     };
 
     const modifyDetails = async () => {
-        let modifyResult = await fetch("http://localhost:3001/usermodify", {
+        let modifyResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/usermodify`, {
             method: 'post',
             body: JSON.stringify({
                 _id: username._id,
@@ -68,7 +68,7 @@ function Profile() {
             alert(" Enter Password");
         }
         else {
-            let modifyResult = await fetch("http://localhost:3001/usermodify", {
+            let modifyResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/usermodify`, {
                 method: 'post',
                 body: JSON.stringify({
                     _id: username._id,

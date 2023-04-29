@@ -25,7 +25,8 @@ function Login() {
         }
     });
     const login = async () => {
-        let loginStatus = await fetch("http://localhost:3001/Login", {
+       
+        let loginStatus = await fetch(`${process.env.REACT_APP_SERVER_URL}/Login`, {
             method: "post",
             body: JSON.stringify({
                 "name": name,
@@ -50,7 +51,7 @@ function Login() {
 
 
     const register = async () => {
-        let registerStatus = await fetch("http://localhost:3001/useradd", {
+        let registerStatus = await fetch(`${process.env.REACT_APP_SERVER_URL}/useradd`, {
             method: "post",
             body: JSON.stringify({
                 "name": name,

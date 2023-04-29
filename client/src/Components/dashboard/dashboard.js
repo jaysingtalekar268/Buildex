@@ -46,7 +46,7 @@ function Dashboard() {
     );
 
     const getProject = async () => {
-        let userProjectResult = await fetch("http://localhost:3001/getuserprojectstatus", {
+        let userProjectResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getuserprojectstatus`, {
             method: "post",
             body: JSON.stringify({
                 name: username.name,

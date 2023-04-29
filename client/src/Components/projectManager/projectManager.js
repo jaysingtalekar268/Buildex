@@ -48,7 +48,7 @@ function ProjectManager() {
 
     const addProject = async () => {
         // alert(projectName + projectDesc);
-        let addresult = await fetch("http://localhost:3001/Projectadd", {
+        let addresult = await fetch(`${process.env.REACT_APP_SERVER_URL}/Projectadd`, {
             method: 'post',
             body: JSON.stringify({
                 name: projectName,
@@ -85,7 +85,7 @@ function ProjectManager() {
 
     const getdevlist = async () => {
 
-        let listresult = await fetch("http://localhost:3001/getdevl", {
+        let listresult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getdevl`, {
             method: 'post',
             body: JSON.stringify(),
             headers: {
@@ -105,7 +105,7 @@ function ProjectManager() {
 
     const getprojlist = async () => {
 
-        let listresult = await fetch("http://localhost:3001/getproject", {
+        let listresult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getproject`, {
             method: 'post',
             body: JSON.stringify(),
             headers: {
@@ -125,7 +125,7 @@ function ProjectManager() {
 
     const getmanglist = async () => {
 
-        let listresult = await fetch("http://localhost:3001/getmang", {
+        let listresult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getmang`, {
             method: 'post',
             body: JSON.stringify(),
             headers: {
@@ -150,7 +150,7 @@ function ProjectManager() {
         //     temp_Status= multiProjSingSel.pstatus;
         // } 
 
-        let modifyPResult = await fetch("http://localhost:3001/projectmodify", {
+        let modifyPResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/projectmodify`, {
             method: 'post',
             body: JSON.stringify({
                 p_id: multiProjSingSel._id,
@@ -181,7 +181,7 @@ function ProjectManager() {
     const deleteProject = async () => {
 
 
-        let deltePResult = await fetch("http://localhost:3001/projectdelete", {
+        let deltePResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/projectdelete`, {
             method: 'post',
             body: JSON.stringify({
                 p_id: multiProjSingSel._id,

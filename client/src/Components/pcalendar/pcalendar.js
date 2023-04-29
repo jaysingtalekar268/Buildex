@@ -14,7 +14,7 @@ function PCalendar() {
     const isLoading = useRef(true); // Loading state
 
     const getdates = async () => {
-        let DateResult = await fetch("http://localhost:3001/getuserdates", {
+        let DateResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getuserdates`, {
             method: 'post',
             body: JSON.stringify({
                 name: username.name
@@ -49,7 +49,7 @@ function PCalendar() {
 
 
     const setevent = async () => {
-        let eventResult = await fetch("http://localhost:3001/eventadd", {
+        let eventResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/eventadd`, {
             method: 'post',
             body: JSON.stringify({
                 name: username.name,

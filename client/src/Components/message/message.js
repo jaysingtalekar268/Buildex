@@ -17,7 +17,7 @@ function Message() {
 
     const getUmessage = async () => {
 
-        let userMData = await fetch("http://localhost:3001/getusermessage", {
+        let userMData = await fetch(`${process.env.REACT_APP_SERVER_URL}/getusermessage`, {
             method: "post",
             body: JSON.stringify({
                 name: username.name
@@ -37,7 +37,7 @@ function Message() {
         }
     };
     const addnewmsg = async () => {
-        let addmsgstatus = await fetch("http://localhost:3001/messageadd", {
+        let addmsgstatus = await fetch(`${process.env.REACT_APP_SERVER_URL}/messageadd`, {
             method: "post",
             body: JSON.stringify({
                 project_id: userMessage[0].project_id[MPIndex]._id,

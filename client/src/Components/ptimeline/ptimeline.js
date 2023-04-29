@@ -9,7 +9,7 @@ function Ptimeline() {
     const [TLData, setTData] = useState("");
     const [TLArray, setTLArray] = useState("");
     const gettimeline = async () => {
-        let TimeResult = await fetch("http://localhost:3001/getusertimeline", {
+        let TimeResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getusertimeline`, {
             method: 'post',
             body: JSON.stringify({
                 name: username.name

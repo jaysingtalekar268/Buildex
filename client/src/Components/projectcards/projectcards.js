@@ -9,7 +9,7 @@ function ProjectCards() {
     const [userProjectList, setPList] = useState();
     username = JSON.parse(username);
     const getuserproject = async () => {
-        let userProjectResult = await fetch("http://localhost:3001/getuserproject", {
+        let userProjectResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getuserproject`, {
             method: 'post',
             body: JSON.stringify({
                 name: username.name

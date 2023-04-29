@@ -18,7 +18,7 @@ function ProjectEmployee() {
 
     const getprojlist = async () => {
 
-        let listresult = await fetch("http://localhost:3001/getproject", {
+        let listresult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getproject`, {
             method: 'post',
             body: JSON.stringify(),
             headers: {
@@ -56,7 +56,7 @@ function ProjectEmployee() {
         //     temp_Status= multiProjSingSel.pstatus;
         // } 
 
-        let modifyPResult = await fetch("http://localhost:3001/addusertimeline", {
+        let modifyPResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/addusertimeline`, {
             method: 'post',
             body: JSON.stringify({
                 project_id: multiProjSingSel._id,
