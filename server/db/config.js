@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://admin:root123@buildex.t5zyfgm.mongodb.net/buildex?retryWrites=true&w=majority",{
+mongoose.connect(`${process.env.MONGODB_URL}`,{
     useNewUrlParser: true,
      useUnifiedTopology: true
 }).then(()=>{
