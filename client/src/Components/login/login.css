@@ -86,3 +86,14 @@
 {
 display: block;
 }
+.footer
+{
+  position: fixed;
+bottom: 0px;
+  border-style: solid;
+  background-color: black;
+  color: white;
+  display: flex;
+  padding-top: 1%;
+  justify-content: center;
+}

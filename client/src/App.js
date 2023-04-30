@@ -6,6 +6,7 @@ import Home from './Components/home/home';
 import Myproject from './Components/myproject/myproject';
 import PrivateComponent from './Components/privatecomponents/privatecomponets';
 import Profile from './Components/profile/profile';
+import { Component } from 'react';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           </Route>
           <Route path='/Login' element={<Login></Login>}> </Route>
         </Routes>
+      
       </BrowserRouter>
 
     </>
