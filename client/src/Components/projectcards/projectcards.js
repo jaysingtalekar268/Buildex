@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import './projectcards.css';
 function ProjectCards() {
 
     let username = localStorage.getItem("user");
+    const navigate = useNavigate();
     const [userProjectList, setPList] = useState();
     username = JSON.parse(username);
     const getuserproject = async () => {
-        let userProjectResult = await fetch("http://localhost:3001/getuserproject", {
+        let userProjectResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getuserproject`, {
             method: 'post',
             body: JSON.stringify({
                 name: username.name
@@ -42,8 +44,8 @@ function ProjectCards() {
     }, []);
 
     const ename = (names) => {
-       
-         if (userProjectList) {
+
+        if (userProjectList) {
 
             console.warn("ulist" + userProjectList[0].project_id.name);
 
@@ -51,33 +53,38 @@ function ProjectCards() {
             // return names.map(name => <option value={name._id}>{name.name + " " + name._id}</option>);
             return (
                 names.map(name =>
-                    (
-                        name.project_id.map( xname=>
-                    <Card className="cardContainer ">
-                        <Card.Body>
+                (
+                    name.project_id.map(xname =>
+                        <Card className="cardContainer ">
+                            <Card.Body>
 
 
-                            <Card.Title> {xname.name}</Card.Title>
-                            <Card.Text>
-                                {xname.desc}
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
+                                <Card.Title> {xname.name}</Card.Title>
+                                <Card.Text>
+                                    {xname.desc}
+                                </Card.Text>
+                                <Button variant="primary" onClick={() => navigate('/MyProject',)} >Details</Button>
+                            </Card.Body>
 
-                    </Card>
-                        )
+                        </Card>
                     )
+                )
                 )
             )
 
 
         }
         else {
-            return (<span>wating to get user projects</span>);
+            return (<span class='card bg-opacity-75  bg-dark text-light'>wating to get user projects</span>);
         }
     }
 
+
+    if(ename)
+    {
+
     return (
+
         <div className="cardDiv ">
 
             {/* <Card className="cardContainer ">
@@ -96,6 +103,16 @@ function ProjectCards() {
             {ename(userProjectList)}
         </div>
     );
+        }
+        else
+        {
+            return (
+                <div className="cardDiv ">
+                    
+                </div>
+            );
+        }
+
 }
 
 export default ProjectCards;

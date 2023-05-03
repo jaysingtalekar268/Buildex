@@ -1,0 +1,37 @@
+.calendarStyle {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fbf4fe;
+    color: #ffffff;
+    }
+    .react-calendar__tile
+    {
+        height: 100px;
+    }
+    .react-calendar__tile--active {
+    background-color: #4285f4 !important;
+    border-color: #4285f4 !important;
+    
+    }
+    
+    .react-calendar__tile--active:enabled:hover,
+    .react-calendar__tile--active:enabled:focus {
+    background-color: #2a75f3 !important;
+    border-color: #2a75f3 !important;
+    }
+    
+    .react-calendar__tile--now {
+    background-color: #444444 !important;
+    border-color: #444444 !important;
+    color: #ffffff !important;
+    }
+    
+    .react-calendar__tile--now:enabled:hover,
+    .react-calendar__tile--now:enabled:focus {
+    background-color: #666666 !important;
+    border-color: #666666 !important;
+    }
+    
+    .react-calendar__tile--now:disabled {
+    background-color: #444444
+    }

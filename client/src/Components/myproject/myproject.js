@@ -4,9 +4,9 @@ function Myproject()
 {
 
     return (
-       <div>
+       <>
         <ProjectNavBar></ProjectNavBar>
-       </div>
+       </>
     );
 }
 

@@ -1,5 +1,5 @@
 import './dashboard.css'
-import { Card, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import Chart from "react-apexcharts";
 
@@ -46,7 +46,7 @@ function Dashboard() {
     );
 
     const getProject = async () => {
-        let userProjectResult = await fetch("http://localhost:3001/getuserprojectstatus", {
+        let userProjectResult = await fetch(`${process.env.REACT_APP_SERVER_URL}/getuserprojectstatus`, {
             method: "post",
             body: JSON.stringify({
                 name: username.name,
@@ -165,52 +165,47 @@ function Dashboard() {
 
     };
     return (
-        <div className='dashboardContainer'>
-            <Card className='dashboardCard'>
-                <Card.Body>
-                    <Card.Title className='dashboardCardTitle'>Completed Tasks</Card.Title>
-                    <span className='CompletedTaskCount' >{compTask}</span>
+        <div class="container row row-cols-1 row-cols-md-2 g-4 bg-gradient bg-opacity-75 text-black">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Completed Tasks</div>
+                    <div class="card-body">{compTask}</div>
                     {/* <button onClick={getProjectStatus}>get project</button> */}
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Incompleted Tasks</div>
+                    <div class="card-body">{incoTask}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Overdue Tasks</div>
+                    <div class="card-body">{overTask}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Total Tasks</div>
+                    <div class="card-body">{totalTask}</div>
+                </div>
+            </div>
 
-                </Card.Body>
-            </Card>
-            <Card className='dashboardCard'>
-                <Card.Body>
-                    <Card.Title className='dashboardCardTitle'>Incompleted Tasks</Card.Title>
-                    <span className='CompletedTaskCount' >{incoTask}</span>
-
-                </Card.Body>
-            </Card>
-            <Card className='dashboardCard'>
-                <Card.Body>
-                    <Card.Title className='dashboardCardTitle'>Overdure Tasks</Card.Title>
-                    <span className='CompletedTaskCount' >{overTask}</span>
-
-                </Card.Body>
-            </Card>
-            <Card className='dashboardCard'>
-                <Card.Body>
-                    <Card.Title className='dashboardCardTitle'>Total Tasks</Card.Title>
-                    <span className='CompletedTaskCount' >{totalTask}</span>
-
-                </Card.Body>
-            </Card>
-
-            {catg[0] ? <Chart options={barChartData.options} series={barChartData.series} type="bar" width={500} height={320} /> : <span>waiting for data</span>}
-
-            <Chart options={pieCharData.options} series={pieData} type="donut" width="380" />
-            {/* <Card className='dashboardCardGraph'>
-                <Card.Body>
-                    <Card.Title className='dashboardCardTitle'>All task by completion status</Card.Title>
-                    <span className='CompletedTaskCount' >100</span>
+            <div class="col">
+                <div class='card'>
+                    {catg[0] ? (
+                        <Chart options={barChartData.options} series={barChartData.series} type="bar" width={500} height={320} />
+                    ) : (
+                        <div>Waiting for data</div>
+                    )}
+                </div>
+            </div>
+            <div class='col'>
+                <div class='card'>
                     <Chart options={pieCharData.options} series={pieData} type="donut" width="380" />
-
-                </Card.Body>
-            </Card> */}
-            {/* 
-            {"catg" + catg + ""}
-            {" catg count" + catgCount + ""} */}
-
+                </div>
+            </div>
         </div>
     );
 }

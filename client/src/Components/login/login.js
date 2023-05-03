@@ -1,7 +1,7 @@
+import './login.css';
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
-import { Container, Button, Tabs, div } from 'react-bootstrap';
-import './login.css'
+import { Container, Button, Tabs, Tab } from 'react-bootstrap';
 
 function Login() {
 
@@ -25,7 +25,8 @@ function Login() {
         }
     });
     const login = async () => {
-        let loginStatus = await fetch("http://localhost:3001/Login", {
+
+        let loginStatus = await fetch(`${process.env.REACT_APP_SERVER_URL}/Login`, {
             method: "post",
             body: JSON.stringify({
                 "name": name,
@@ -45,11 +46,12 @@ function Login() {
             navigate("/");
         }
 
+
     };
 
 
     const register = async () => {
-        let registerStatus = await fetch("http://localhost:3001/useradd", {
+        let registerStatus = await fetch(`${process.env.REACT_APP_SERVER_URL}/useradd`, {
             method: "post",
             body: JSON.stringify({
                 "name": name,
@@ -73,6 +75,7 @@ function Login() {
                 // navigate("/");
             }
         }
+
     };
 
 
@@ -109,42 +112,57 @@ function Login() {
 
 
     return (
+        <>
+            <div className='text-center position-absolute top-50 start-50 translate-middle shadow p-3 mb-5 bg-body rounded bg-info'>
+                <Tabs id="controlled-tab-example"
+                    activeKey={tabKey}
+                    onSelect={(k) => setTab(k)}
+                    className="">
+                    <Tab eventKey="login" class='card shadow text-center vw-50 vh-50'>
+                        <label>Your Username</label>
 
-        <div class='text-center position-absolute top-50 start-50 translate-middle shadow p-3 mb-5 bg-body rounded bg-info'>
-            <Tabs id="controlled-tab-example" activeKey={tabKey} onSelect={(k) => setTab(k)} class=''>
-                <div eventKey="login" class='card shadow text-center vw-50 vh-50'>
-                    <label>Your Username</label>
-                    <input class='form-text' onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Username'></input>
-                    <div class='text-warning'>{nameWarn}</div>
-                    <label>Your Password</label>
-                    <input class='form-text' onChange={(e) => setPwd(e.target.value)} type="password" placeholder='Enter Password'></input>
-                    <div class='text-warning align-items-md-end'>{passWarn}</div>
-                    <div><a class='link' onClick={() => setTab("register")}>New to Buildex?</a></div>
-                    <div class='btn btn-light btn-lg align-middle align-self-center ' onClick={CheckInput}>Login</div>
-                </div>
-                <div eventKey="register" class='card text-center shadow vw-50 vh-50'>
-                    <label>Your Username</label>
-                    <input className='form-text' onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Username'></input>
-                    <div class='text-warning align-items-md-end'>{nameWarn}</div>
-                    <label>Your Password</label>
-                    <input className='form-text' onChange={(e) => setPwd(e.target.value)} type="text" placeholder='Enter Password'></input>
-                    <div class='text-warning align-items-md-end'>{passWarn}</div>
-                    <label>Your Email</label>
-                    <input className='form-text' onChange={(e) => setEmail(e.target.value)} type="text" placeholder='Enter Email'></input>
-                    <div class='text-warning align-items-md-end'>{passWarn}</div>
-                    <label>Your Phone</label>
-                    <input className='form-text' onChange={(e) => setPhone(e.target.value)} type="text" placeholder='Enter Phone'></input>
-                    <div class='text-warning align-items-md-end'>{passWarn}</div>
-                    <label>Your Role</label>
-                    <input className='form-text' onChange={(e) => setRole(e.target.value)} type="text" placeholder='Enter Role'></input>
-                    <div class='text-warning align-items-md-end'>{passWarn}</div>
-                    <div><a class='link' onClick={() => setTab("login")}>Already have account</a></div>
-                    <button div class='btn btn-light btn-lg align-middle align-self-center ' onClick={CheckInput}>Register</button>
-                </div>
-            </Tabs>
+                        <label className='userguide'>username - manager</label>
 
-        </div>
+                        <label className='userguide'>username - developer</label>
 
+                        <input class='form-text' onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Username'></input>
+                        <div class='text-warning'>{nameWarn}</div>
+
+                        <label>Your Password</label>
+                        <label className='userguide'>password - root123</label>
+
+                        <input class='form-text' onChange={(e) => setPwd(e.target.value)} type="password" placeholder='Enter Password'></input>
+                        <div class='text-warning align-items-md-end'>{passWarn}</div>
+                        <div><a class='link' onClick={() => setTab("register")}>New to Buildex?</a></div>
+                        <div class='btn btn-light btn-lg align-middle align-self-center ' onClick={CheckInput}>Login</div>
+                    </Tab>
+                    <Tab eventKey="register" class='card text-center shadow vw-50 vh-50'>
+                        <label>Your Username</label>
+                        <input className='form-text' onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Username'></input>
+                        <div class='text-warning align-items-md-end'>{nameWarn}</div>
+                        <label>Your Password</label>
+                        <input className='form-text' onChange={(e) => setPwd(e.target.value)} type="text" placeholder='Enter Password'></input>
+                        <div class='text-warning align-items-md-end'>{passWarn}</div>
+                        <label>Your Email</label>
+                        <input className='form-text' onChange={(e) => setEmail(e.target.value)} type="text" placeholder='Enter Email'></input>
+                        <div class='text-warning align-items-md-end'>{passWarn}</div>
+                        <label>Your Phone</label>
+                        <input className='form-text' onChange={(e) => setPhone(e.target.value)} type="text" placeholder='Enter Phone'></input>
+                        <div class='text-warning align-items-md-end'>{passWarn}</div>
+                        <label>Your Role</label>
+                        <label className='userguide'>enter manager or developer only </label>
+                        <input className='form-text' onChange={(e) => setRole(e.target.value)} type="text" placeholder='Enter Role'></input>
+                        <div class='text-warning align-items-md-end'>{passWarn}</div>
+                        <div><a class='link' onClick={() => setTab("login")}>Already have account</a></div>
+                        <button div class='btn btn-light btn-lg align-middle align-self-center ' onClick={CheckInput}>Register</button>
+                    </Tab>
+                </Tabs>
+
+            </div>
+            <Container fluid className='footer'>
+                <p> Created by- Team Buildex  <a href='https://github.com/jaysingtalekar268/Buildex'> checkout here</a></p>
+            </Container>
+        </>
     );
 
 };
